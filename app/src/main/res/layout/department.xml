@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:orientation="vertical">
+
+   <androidx.cardview.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="120dp"
+       app:cardCornerRadius="5dp">
+
+       <ImageView
+           android:id="@+id/department_image"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:scaleType="fitXY">
+
+       </ImageView>
+
+   </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/department_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Department"
+        android:layout_marginTop="7dp"
+        android:textColor="#2B2A2A"
+        android:textSize="14sp"
+        android:textStyle="italic"/>
+
+    <LinearLayout
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_aided"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:text="Aided"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape"
+            />
+
+        <Button
+            android:id="@+id/btn_unaided"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:text="UnAided"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape2"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
