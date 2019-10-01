@@ -30,6 +30,7 @@ public class DepartmentViewHolder extends RecyclerView.ViewHolder  implements Vi
         btnAided = itemView.findViewById(R.id.btn_aided);
         btnUnAided = itemView.findViewById(R.id.btn_unaided);
 
+        itemView.setOnCreateContextMenuListener(this);
         itemView.setOnClickListener(this);
 
     }

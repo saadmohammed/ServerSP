@@ -17,8 +17,8 @@
             android:id="@+id/staff_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:civ_border_width="0dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/ic_launcher_background"
+            app:civ_border_width="0dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
                 android:layout_marginTop="8dp"
                 android:text="Name"
                 android:textAllCaps="false"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#413F3F"/>
 
@@ -42,11 +42,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Posting"
+                android:text="Post"
                 android:textAllCaps="false"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="#474646" />
-
+            <TextView
+                android:id="@+id/staff_degree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Degree"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:textColor="#474646"/>
+            <TextView
+                android:id="@+id/staff_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Phone"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:textColor="#474646"/>
+            <TextView
+                android:id="@+id/staff_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Email"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:textColor="#474646"/>
+            <TextView
+                android:id="@+id/staff_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Degree"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:textColor="#474646"/>
 
         </LinearLayout>
 
