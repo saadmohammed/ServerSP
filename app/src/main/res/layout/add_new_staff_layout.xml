@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:layout_scrollFlags="exitUntilCollapsed"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -19,13 +20,12 @@
             android:hint="Name"
             android:inputType="text"
             android:textAlignment="textStart"
-            android:textSize="24sp"
+            android:textSize="14sp"
             android:textColor="@color/colorPrimaryDark"
             app:met_baseColor="@color/colorPrimary"
             app:met_primaryColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
             app:met_singleLineEllipsis="true"/>
-
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPost"
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:hint="Post"
             android:inputType="text"
             android:textAlignment="textStart"
-            android:textSize="24sp"
+            android:textSize="14sp"
             android:textColor="@color/colorPrimaryDark"
             app:met_baseColor="@color/colorPrimary"
             app:met_primaryColor="@color/colorPrimary"
@@ -46,7 +46,7 @@
             android:hint="Degree"
             android:inputType="text"
             android:textAlignment="textStart"
-            android:textSize="24sp"
+            android:textSize="14sp"
             android:textColor="@color/colorPrimaryDark"
             app:met_baseColor="@color/colorPrimary"
             app:met_primaryColor="@color/colorPrimary"
@@ -59,7 +59,7 @@
             android:hint="Phone"
             android:inputType="number"
             android:textAlignment="textStart"
-            android:textSize="24sp"
+            android:textSize="14sp"
             android:textColor="@color/colorPrimaryDark"
             app:met_baseColor="@color/colorPrimary"
             app:met_primaryColor="@color/colorPrimary"
@@ -72,7 +72,7 @@
             android:hint="Email"
             android:inputType="text"
             android:textAlignment="textStart"
-            android:textSize="24sp"
+            android:textSize="14sp"
             android:textColor="@color/colorPrimaryDark"
             app:met_baseColor="@color/colorPrimary"
             app:met_primaryColor="@color/colorPrimary"
@@ -85,7 +85,7 @@
             android:hint="Address"
             android:inputType="text"
             android:textAlignment="textStart"
-            android:textSize="24sp"
+            android:textSize="14sp"
             android:textColor="@color/colorPrimaryDark"
             app:met_baseColor="@color/colorPrimary"
             app:met_primaryColor="@color/colorPrimary"
@@ -97,7 +97,7 @@
             android:weightSum="2"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp">
 
             <Button
                 android:text="SELECT"
@@ -105,10 +105,10 @@
                 android:textColor="#fff"
                 android:background="@drawable/shape"
                 android:layout_margin="8sp"
-                android:id="@+id/btnSelect"
+                android:id="@+id/btnStaffSelect"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                android:layout_height="40dp" />
 
             <Button
                 android:text="UPLOAD"
@@ -116,10 +116,10 @@
                 android:textColor="#fff"
                 android:background="@drawable/shape2"
                 android:layout_margin="8sp"
-                android:id="@+id/btnUpload"
+                android:id="@+id/btnStaffUpload"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                android:layout_height="40dp" />
 
         </LinearLayout>
 

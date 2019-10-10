@@ -252,8 +252,9 @@ public class MainActivity extends AppCompatActivity {
                             imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    //set value for newCategory if image upload and we can get download link
+                                    //set value for newDepartment if image upload and we can get download link
                                     newDepartment = new Department(editName.getText().toString(), uri.toString());
+
 
                                 }
                             });

@@ -12,12 +12,11 @@ import com.jmc.serversp.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class StaffViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
+public class StaffViewHolder extends RecyclerView.ViewHolder implements  View.OnCreateContextMenuListener {
 
     public TextView staffName, staffPost, staffDegree, staffPhone, staffEmail, staffAddress;
     public ImageView staffImage;
 
-    private ItemClickListener itemClickListener;
 
 
     public StaffViewHolder(@NonNull View itemView) {
@@ -31,19 +30,10 @@ public class StaffViewHolder extends RecyclerView.ViewHolder implements View.OnC
         staffEmail = itemView.findViewById(R.id.staff_email);
         staffAddress = itemView.findViewById(R.id.staff_address);
 
-        itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
 
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
-
-    }
-    @Override
-    public void onClick(View view) {
-        itemClickListener.onClick(view, getAdapterPosition(), false);
-    }
 
 
     @Override

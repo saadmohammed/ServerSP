@@ -8,6 +8,26 @@ public class Staff {
     private String Email;
     private String Image;
     private String Address;
+    private String DeptId;
+
+    public Staff(String name, String post, String degree, Long phone, String email, String image, String address, String deptId) {
+        Name = name;
+        Post = post;
+        Degree = degree;
+        Phone = phone;
+        Email = email;
+        Image = image;
+        Address = address;
+        DeptId = deptId;
+    }
+
+    public String getDeptId() {
+        return DeptId;
+    }
+
+    public void setDeptId(String deptId) {
+        DeptId = deptId;
+    }
 
     public String getAddress() {
         return Address;
