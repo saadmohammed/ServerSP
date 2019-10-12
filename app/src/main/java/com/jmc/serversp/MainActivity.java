@@ -173,6 +173,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.add:
                 showDialog();
                 return (true);
+            case R.id.ntAided:
+                startActivity(new Intent(getApplicationContext(),NTAidedActivity.class));
+                return (true);
+            case R.id.ntUnAided:
+                startActivity(new Intent(getApplicationContext(),NTUnAidedActivity.class));
+                return (true);
+
         }
         return (super.onOptionsItemSelected(item));
     }
@@ -446,13 +453,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
-
         database.child(key).removeValue();
         Toast.makeText(this,"Department  deleted Successfully",Toast.LENGTH_SHORT).show();
         imageFolder.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -463,4 +466,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 }

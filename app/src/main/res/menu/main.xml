@@ -7,5 +7,16 @@
         android:title="Add"
         android:icon="@drawable/ic_add_black_24dp">
     </item>
+    <item
+        android:id="@+id/ntAided"
+        android:icon="@drawable/ic_info_black_24dp"
+        app:showAsAction="never"
+        android:title="Non-Teaching Aided">
+    </item>
+    <item
+        android:id="@+id/ntUnAided"
+        app:showAsAction="never"
+        android:title="Non-Teaching UnAided">
+    </item>
 
 </menu>

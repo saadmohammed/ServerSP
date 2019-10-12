@@ -13,14 +13,12 @@ import com.jmc.serversp.R;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class DepartmentViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener,View.OnCreateContextMenuListener {
+public class DepartmentViewHolder extends RecyclerView.ViewHolder  implements View.OnCreateContextMenuListener {
 
 
     public TextView departmentName;
     public ImageView departmentImage;
     public Button btnAided,btnUnAided;
-
-    private ItemClickListener itemClickListener;
 
     public DepartmentViewHolder( View itemView) {
         super(itemView);
@@ -31,18 +29,10 @@ public class DepartmentViewHolder extends RecyclerView.ViewHolder  implements Vi
         btnUnAided = itemView.findViewById(R.id.btn_unaided);
 
         itemView.setOnCreateContextMenuListener(this);
-        itemView.setOnClickListener(this);
 
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
-    }
 
-    @Override
-    public void onClick(View view) {
-        itemClickListener.onClick(view, getAdapterPosition(), false);
-    }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
