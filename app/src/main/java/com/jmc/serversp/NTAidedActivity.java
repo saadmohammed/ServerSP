@@ -7,11 +7,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -64,10 +66,10 @@ public class NTAidedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ntaided);
 
-        relativeLayout = findViewById(R.id.UnAidedRelativeLayout);
+        relativeLayout = findViewById(R.id.NTAidedRelativeLayout);
 
         Toolbar toolbar = findViewById(R.id.toolbarNTAided);
-        toolbar.setTitle("NTAided Staff");
+        toolbar.setTitle("NT Aided Staff");
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
@@ -119,7 +121,6 @@ public class NTAidedActivity extends AppCompatActivity {
         adapter.startListening();
     }
 
-
     private void showAddStaffDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(NTAidedActivity.this);
         alertDialog.setTitle("Add new NTStaff");
@@ -132,14 +133,6 @@ public class NTAidedActivity extends AppCompatActivity {
         editPhone = add_staff_layout.findViewById(R.id.edtPhone);
         editDesignation = add_staff_layout.findViewById(R.id.edtDesignation);
 
-        buttonUpload = add_staff_layout.findViewById(R.id.btnNTStaffUpload);
-
-        buttonUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadDetails();
-            }
-        });
 
         alertDialog.setView(add_staff_layout);
         alertDialog.setIcon(R.drawable.ic_playlist_add_black_24dp);
@@ -148,6 +141,31 @@ public class NTAidedActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String name = editName.getText().toString();
+                String designation = editDesignation.getText().toString();
+                Long phone = Long.valueOf(editPhone.getText().toString());
+
+                if (Common.isConnectedToInternet(getApplicationContext())){
+                    if (name.isEmpty() || designation.isEmpty() || phone == 0){
+                        Toast.makeText(getApplicationContext(),"Please all the fields",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        newNTStaff = new NTStaff(name, designation, phone);
+                        staffList.push().setValue(newNTStaff).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(),"Uploaded "+newNTStaff+" ",Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(),"Unable to upload "+newNTStaff+" ",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }
+
+
                 dialog.dismiss();
             }
         });
@@ -162,50 +180,94 @@ public class NTAidedActivity extends AppCompatActivity {
 
     }
 
-    private void uploadDetails() {
-        String name = editName.getText().toString();
-        String designation = editDesignation.getText().toString();
-        Long phone = Long.valueOf(editPhone.getText().toString());
+    @Override
+    public boolean onContextItemSelected(@NonNull final MenuItem item) {
 
-        if (Common.isConnectedToInternet(getApplicationContext())){
-            if (name.isEmpty() || designation.isEmpty() || phone == 0){
-                Toast.makeText(getApplicationContext(),"Please all the fields",Toast.LENGTH_SHORT).show();
-            }
-            else {
-                newNTStaff = new NTStaff(name, designation, phone);
-                staffList.push().setValue(newNTStaff).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(),"Uploaded "+newNTStaff+" ",Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"Unable to upload "+newNTStaff+" ",Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+        if (item.getTitle().equals(Common.UPDATE)){
+            showUpdateStaffDialog(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
+        }else if(item.getTitle().equals(Common.DELETE)){
+
+            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(NTAidedActivity.this);
+            alertDialog.setTitle("Delete Item");
+            alertDialog.setMessage("Are you sure?");
+
+            alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                   adapter.getRef(item.getOrder()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                       @Override
+                       public void onSuccess(Void aVoid) {
+                           Toast.makeText(getApplicationContext(),"Deleted Succesfully ",Toast.LENGTH_SHORT).show();
+
+                       }
+                   }).addOnFailureListener(new OnFailureListener() {
+                       @Override
+                       public void onFailure(@NonNull Exception e) {
+                           Toast.makeText(getApplicationContext(),"Unable to delete "+e.getMessage()+" ",Toast.LENGTH_SHORT).show();
+                       }
+                   });
+
+                }
+            });
+
+            alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            alertDialog.show();
+
         }
-
-        /*staffList.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                newNTStaff = new NTStaff();
-                newNTStaff.setName(editName.getText().toString());
-                newNTStaff.setDesignation(editDesignation.getText().toString());
-                newNTStaff.setPhone(Long.valueOf(editPhone.getText().toString()));
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
+        return super.onContextItemSelected(item);
     }
 
+    private void showUpdateStaffDialog(final String key, final NTStaff item) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(NTAidedActivity.this);
+        alertDialog.setTitle("Edit Staff");
+        alertDialog.setMessage("Please fill full information");
 
+        LayoutInflater inflater = getLayoutInflater();
+        View add_item_layout = inflater.inflate(R.layout.add_new_ntstaff_layout,null);
+
+        editName = add_item_layout.findViewById(R.id.edtName);
+        editPhone = add_item_layout.findViewById(R.id.edtPhone);
+        editDesignation = add_item_layout.findViewById(R.id.edtDesignation);
+
+        editName.setText(item.getName());
+        editDesignation.setText(item.getDesignation());
+        editPhone.setText(item.getPhone().toString());
+
+        alertDialog.setView(add_item_layout);
+        alertDialog.setIcon(R.drawable.ic_playlist_add_black_24dp);
+
+        //Set button
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                //Update Information
+                item.setName(editName.getText().toString());
+                item.setPhone(Long.valueOf(editPhone.getText().toString()));
+                item.setDesignation(editDesignation.getText().toString());
+
+                staffList.child(key).setValue(item);
+                Snackbar.make(relativeLayout,"Staff "+item.getName()+" was edited",Snackbar.LENGTH_SHORT).show();
+
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.show();
+    }
 
 
 }

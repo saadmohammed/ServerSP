@@ -56,25 +56,5 @@
             android:textColorHint="@color/colorPrimaryDark"
             app:met_singleLineEllipsis="true"/>
 
-
-        <LinearLayout
-            android:weightSum="1"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <Button
-                android:text="UPLOAD"
-                android:shadowColor="@color/colorPrimaryDark"
-                android:textColor="#fff"
-                android:background="@drawable/shape2"
-                android:layout_margin="8sp"
-                android:id="@+id/btnNTStaffUpload"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="40dp" />
-
-        </LinearLayout>
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>
